@@ -13,14 +13,20 @@ class ArbolBinario {
     }
 
     generarArbol(expresion){
-        let vector = new Array;
+        let vector = new Array(expresion);
         for(let i=0; i<expresion.length; i++){
             let cifra=expresion[i];
-            if(cifra === '+' || cifra === '-' || cifra === '*' || cifra === '/'){
+            if(cifra === '*' || cifra === '/'){
                 let nodo = new Nodo(cifra);
-                nodo.der = vector.pop();
-                nodo.izq = vector.pop();
+                nodo.hder = vector.pop();
+                nodo.hizq = vector.pop();
                 vector.push(nodo);
+                if(cifra === '+' || cifra === '-'){
+                    let nodo = new Nodo(cifra);
+                    nodo.der = vector.pop();
+                    nodo.izq = vector.pop();
+                    vector.push(nodo);
+                }
             } else {
                 let nodo = new Nodo(cifra);
                 vector.push(nodo);
